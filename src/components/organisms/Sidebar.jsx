@@ -55,15 +55,6 @@ const Sidebar = ({ className }) => {
         ))}
       </nav>
 
-      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-primary-700">
-        <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-700 bg-opacity-50">
-          <ApperIcon name="HelpCircle" size={20} />
-          <div className="flex-1">
-            <p className="text-sm font-medium">Need Help?</p>
-            <p className="text-xs text-primary-300">Contact Support</p>
-          </div>
-        </div>
-      </div>
     </aside>
   );
 };
