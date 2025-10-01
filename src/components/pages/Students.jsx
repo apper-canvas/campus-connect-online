@@ -23,7 +23,7 @@ const Students = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -32,8 +32,10 @@ const Students = () => {
     address: "",
     department: "",
     semester: "",
-    status: "active"
+    status: "active",
+    aadharCardPdf: null
   });
+  const [pdfFileName, setPdfFileName] = useState("");
 
   useEffect(() => {
     loadStudents();
@@ -63,8 +65,22 @@ const Students = () => {
     setFilteredStudents(filtered);
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate PDF file if provided
+    if (formData.aadharCardPdf) {
+      const file = formData.aadharCardPdf;
+      if (file.type !== 'application/pdf') {
+        toast.error("Please upload a valid PDF file");
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        toast.error("PDF file size must be less than 5MB");
+        return;
+      }
+    }
+    
     try {
       await studentService.create(formData);
       toast.success("Student added successfully!");
@@ -78,11 +94,21 @@ const Students = () => {
         address: "",
         department: "",
         semester: "",
-        status: "active"
+        status: "active",
+        aadharCardPdf: null
       });
+      setPdfFileName("");
       loadStudents();
     } catch (err) {
       toast.error(err.message);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPdfFileName(file.name);
+      setFormData({ ...formData, aadharCardPdf: file });
     }
   };
 
@@ -271,13 +297,32 @@ const Students = () => {
             onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
           />
 
-          <FormField
+<FormField
             label="Address"
             id="address"
             required
             value={formData.address}
             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
           />
+
+          <FormField label="Aadhaar Card PDF" id="aadharCardPdf">
+            <div className="space-y-2">
+              <input
+                type="file"
+                id="aadharCardPdf"
+                accept="application/pdf"
+                onChange={handleFileChange}
+                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 cursor-pointer"
+              />
+              {pdfFileName && (
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <ApperIcon name="FileText" size={16} />
+                  <span>{pdfFileName}</span>
+                </div>
+              )}
+              <p className="text-xs text-gray-500">Upload Aadhaar card in PDF format (Max 5MB)</p>
+            </div>
+          </FormField>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField label="Department" id="department" required>

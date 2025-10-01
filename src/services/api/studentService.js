@@ -1,5 +1,7 @@
 import studentsData from "@/services/mockData/students.json";
 import { toast } from "react-toastify";
+import React from "react";
+import Error from "@/components/ui/Error";
 
 const { ApperClient } = window.ApperSDK;
 
@@ -26,11 +28,32 @@ const studentService = {
 create: async (student) => {
     await delay();
     const maxId = Math.max(...studentsData.map(s => s.Id), 0);
+    
+    // Handle PDF file conversion to base64 if provided
+    let aadharCardPdfData = null;
+    if (student.aadharCardPdf && typeof student.aadharCardPdf === 'object' && student.aadharCardPdf.constructor.name === 'File') {
+      const reader = new FileReader();
+      aadharCardPdfData = await new Promise((resolve, reject) => {
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(student.aadharCardPdf);
+      });
+    }
+    
     const newStudent = {
       ...student,
       Id: maxId + 1,
-      studentId: `ST${new Date().getFullYear()}${String(maxId + 1).padStart(3, "0")}`
+      studentId: `ST${new Date().getFullYear()}${String(maxId + 1).padStart(3, "0")}`,
+      aadharCardPdf: aadharCardPdfData,
+      aadharCardFileName: student.aadharCardPdf?.name || null
     };
+    
+    // Remove File object from stored data
+    delete newStudent.aadharCardPdf;
+    if (aadharCardPdfData) {
+      newStudent.aadharCardPdf = aadharCardPdfData;
+    }
+    
     studentsData.push(newStudent);
     
     // Call webhook Edge Function with complete student data

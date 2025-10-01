@@ -1,20 +1,21 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import Button from "@/components/atoms/Button";
-import Card from "@/components/atoms/Card";
-import Badge from "@/components/atoms/Badge";
-import Avatar from "@/components/atoms/Avatar";
+import { format } from "date-fns";
 import ApperIcon from "@/components/ApperIcon";
-import Loading from "@/components/ui/Loading";
+import Courses from "@/components/pages/Courses";
+import Attendance from "@/components/pages/Attendance";
+import Button from "@/components/atoms/Button";
+import Avatar from "@/components/atoms/Avatar";
+import Badge from "@/components/atoms/Badge";
+import Card from "@/components/atoms/Card";
 import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import courseService from "@/services/api/courseService";
 import studentService from "@/services/api/studentService";
 import enrollmentService from "@/services/api/enrollmentService";
-import courseService from "@/services/api/courseService";
 import attendanceService from "@/services/api/attendanceService";
-import { format } from "date-fns";
-
 const StudentDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -67,10 +68,11 @@ const StudentDetail = () => {
   if (error) return <Error message={error} onRetry={loadStudentData} />;
   if (!student) return <Error message="Student not found" />;
 
-  const tabs = [
+const tabs = [
     { id: "info", label: "Personal Info", icon: "User" },
     { id: "courses", label: "Enrolled Courses", icon: "BookOpen" },
-    { id: "attendance", label: "Attendance", icon: "ClipboardCheck" }
+    { id: "attendance", label: "Attendance", icon: "ClipboardCheck" },
+    { id: "documents", label: "Documents", icon: "FileText" }
   ];
 
   return (
@@ -190,8 +192,54 @@ const StudentDetail = () => {
               </div>
             </div>
           </Card>
-        )}
+)}
 
+        {activeTab === "documents" && (
+          <Card className="p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Student Documents
+            </h3>
+            {student.aadharCardPdf ? (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-primary-100 rounded-lg">
+                      <ApperIcon name="FileText" size={24} className="text-primary-700" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-900">
+                        {student.aadharCardFileName || "Aadhaar Card"}
+                      </p>
+                      <p className="text-sm text-gray-500">PDF Document</p>
+                    </div>
+                  </div>
+                  <a
+                    href={student.aadharCardPdf}
+                    download={student.aadharCardFileName || "aadhaar-card.pdf"}
+                    className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+                  >
+                    <ApperIcon name="Download" size={16} />
+                    Download
+                  </a>
+                </div>
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <iframe
+                    src={student.aadharCardPdf}
+                    className="w-full h-[600px]"
+                    title="Aadhaar Card PDF"
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
+                  <ApperIcon name="FileText" size={32} className="text-gray-400" />
+                </div>
+                <p className="text-gray-500">No documents uploaded</p>
+              </div>
+            )}
+          </Card>
+        )}
         {activeTab === "courses" && (
           <Card className="p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-6">Enrolled Courses</h2>
@@ -273,6 +321,7 @@ const StudentDetail = () => {
           </Card>
         )}
       </motion.div>
+</div>
     </div>
   );
 };
