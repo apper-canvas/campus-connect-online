@@ -1,0 +1,146 @@
+[
+  {
+    "Id": 1,
+    "studentId": "1",
+    "courseId": "1",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 2,
+    "studentId": "1",
+    "courseId": "2",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 3,
+    "studentId": "1",
+    "courseId": "3",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 4,
+    "studentId": "2",
+    "courseId": "1",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 5,
+    "studentId": "2",
+    "courseId": "2",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 6,
+    "studentId": "3",
+    "courseId": "4",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 7,
+    "studentId": "3",
+    "courseId": "5",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 8,
+    "studentId": "4",
+    "courseId": "6",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 9,
+    "studentId": "4",
+    "courseId": "7",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 10,
+    "studentId": "5",
+    "courseId": "8",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 11,
+    "studentId": "7",
+    "courseId": "4",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 12,
+    "studentId": "7",
+    "courseId": "5",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 13,
+    "studentId": "8",
+    "courseId": "6",
+    "enrollmentDate": "2023-08-05",
+    "status": "enrolled",
+    "semester": 3
+  },
+  {
+    "Id": 14,
+    "studentId": "9",
+    "courseId": "9",
+    "enrollmentDate": "2022-08-05",
+    "status": "enrolled",
+    "semester": 5
+  },
+  {
+    "Id": 15,
+    "studentId": "9",
+    "courseId": "10",
+    "enrollmentDate": "2022-08-05",
+    "status": "enrolled",
+    "semester": 5
+  },
+  {
+    "Id": 16,
+    "studentId": "10",
+    "courseId": "9",
+    "enrollmentDate": "2022-08-05",
+    "status": "enrolled",
+    "semester": 5
+  },
+  {
+    "Id": 17,
+    "studentId": "10",
+    "courseId": "10",
+    "enrollmentDate": "2022-08-05",
+    "status": "enrolled",
+    "semester": 5
+  },
+  {
+    "Id": 18,
+    "studentId": "11",
+    "courseId": "9",
+    "enrollmentDate": "2022-08-05",
+    "status": "enrolled",
+    "semester": 5
+  }
+]

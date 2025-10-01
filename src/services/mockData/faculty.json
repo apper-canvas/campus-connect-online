@@ -1,0 +1,80 @@
+[
+  {
+    "Id": 1,
+    "employeeId": "FAC001",
+    "firstName": "Dr. Rajesh",
+    "lastName": "Kumar",
+    "email": "rajesh.kumar@campus.edu",
+    "phone": "+91-9876500001",
+    "department": "Computer Science",
+    "designation": "Professor",
+    "qualification": "PhD in Computer Science",
+    "joiningDate": "2015-07-01",
+    "assignedCourses": ["1", "2", "10"]
+  },
+  {
+    "Id": 2,
+    "employeeId": "FAC002",
+    "firstName": "Dr. Sunita",
+    "lastName": "Verma",
+    "email": "sunita.verma@campus.edu",
+    "phone": "+91-9876500002",
+    "department": "Computer Science",
+    "designation": "Associate Professor",
+    "qualification": "PhD in Artificial Intelligence",
+    "joiningDate": "2017-08-15",
+    "assignedCourses": ["3", "9"]
+  },
+  {
+    "Id": 3,
+    "employeeId": "FAC003",
+    "firstName": "Prof. Anil",
+    "lastName": "Mehta",
+    "email": "anil.mehta@campus.edu",
+    "phone": "+91-9876500003",
+    "department": "Electronics",
+    "designation": "Professor",
+    "qualification": "PhD in Electronics Engineering",
+    "joiningDate": "2012-06-01",
+    "assignedCourses": ["4", "5"]
+  },
+  {
+    "Id": 4,
+    "employeeId": "FAC004",
+    "firstName": "Dr. Pooja",
+    "lastName": "Singh",
+    "email": "pooja.singh@campus.edu",
+    "phone": "+91-9876500004",
+    "department": "Mechanical",
+    "designation": "Associate Professor",
+    "qualification": "PhD in Mechanical Engineering",
+    "joiningDate": "2018-07-20",
+    "assignedCourses": ["6", "7"]
+  },
+  {
+    "Id": 5,
+    "employeeId": "FAC005",
+    "firstName": "Prof. Suresh",
+    "lastName": "Patel",
+    "email": "suresh.patel@campus.edu",
+    "phone": "+91-9876500005",
+    "department": "Civil",
+    "designation": "Professor",
+    "qualification": "PhD in Civil Engineering",
+    "joiningDate": "2010-08-01",
+    "assignedCourses": ["8"]
+  },
+  {
+    "Id": 6,
+    "employeeId": "FAC006",
+    "firstName": "Dr. Kavita",
+    "lastName": "Sharma",
+    "email": "kavita.sharma@campus.edu",
+    "phone": "+91-9876500006",
+    "department": "Computer Science",
+    "designation": "Assistant Professor",
+    "qualification": "PhD in Data Science",
+    "joiningDate": "2020-07-01",
+    "assignedCourses": []
+  }
+]
