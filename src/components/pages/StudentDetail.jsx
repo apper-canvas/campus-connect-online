@@ -161,11 +161,12 @@ const tabs = [
         ))}
       </div>
 
-      <motion.div
+<motion.div
         key={activeTab}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
+        <>
         {activeTab === "info" && (
           <Card className="p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-6">Personal Information</h2>
@@ -317,9 +318,10 @@ const tabs = [
                   );
                 })}
               </div>
-            )}
+)}
           </Card>
         )}
+        </>
       </motion.div>
 </div>
     </div>
