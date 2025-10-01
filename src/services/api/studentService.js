@@ -31,13 +31,50 @@ create: async (student) => {
     
     // Handle PDF file conversion to base64 if provided
     let aadharCardPdfData = null;
-    if (student.aadharCardPdf && typeof student.aadharCardPdf === 'object' && student.aadharCardPdf.constructor.name === 'File') {
+if (student.aadharCardPdf && typeof student.aadharCardPdf === 'object' && student.aadharCardPdf.constructor.name === 'File') {
       const reader = new FileReader();
       aadharCardPdfData = await new Promise((resolve, reject) => {
         reader.onload = () => resolve(reader.result);
         reader.onerror = reject;
         reader.readAsDataURL(student.aadharCardPdf);
       });
+
+      // Process PDF to remove blank pages
+      if (aadharCardPdfData) {
+        try {
+          const blankPageRemovalResult = await apperClient.functions.invoke(
+            import.meta.env.VITE_REMOVE_BLANK_PAGES,
+            {
+              body: JSON.stringify({ pdfData: aadharCardPdfData }),
+              headers: { 'Content-Type': 'application/json' }
+            }
+          );
+
+          if (blankPageRemovalResult && blankPageRemovalResult.ok) {
+            const processedData = await blankPageRemovalResult.json();
+            if (processedData.success) {
+              aadharCardPdfData = processedData.pdfData;
+              toast.success(
+                `PDF processed: ${processedData.pagesRemoved} blank page(s) removed (${processedData.originalPageCount} → ${processedData.finalPageCount} pages)`,
+                { position: "top-right", autoClose: 5000 }
+              );
+            }
+          } else {
+            const responseData = await blankPageRemovalResult.json().catch(() => ({}));
+            console.info(`apper_info: Got an error in this function: ${import.meta.env.VITE_REMOVE_BLANK_PAGES}. The response body is: ${JSON.stringify(responseData)}.`);
+            toast.warning("PDF uploaded but blank page removal failed", {
+              position: "top-right",
+              autoClose: 5000
+            });
+          }
+        } catch (error) {
+          console.info(`apper_info: Got this error in this function: ${import.meta.env.VITE_REMOVE_BLANK_PAGES}. The error is: ${error.message}`);
+          toast.warning("PDF uploaded but processing unavailable", {
+            position: "top-right",
+            autoClose: 5000
+          });
+        }
+      }
     }
     
     const newStudent = {
