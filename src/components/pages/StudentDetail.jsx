@@ -319,11 +319,10 @@ const tabs = [
                 })}
               </div>
             )}
-          </Card>
+</Card>
         )}
       </motion.div>
     </div>
-  </div>
   );
 };
 
