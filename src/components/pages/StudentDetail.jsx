@@ -180,11 +180,19 @@ const tabs = [
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-600">Date of Birth</label>
-                <p className="text-gray-900 mt-1">{format(new Date(student.dateOfBirth), "MMMM d, yyyy")}</p>
+<p className="text-gray-900 mt-1">
+                  {student.dateOfBirth && new Date(student.dateOfBirth).toString() !== 'Invalid Date' 
+                    ? format(new Date(student.dateOfBirth), "MMMM d, yyyy")
+                    : "Date not available"}
+                </p>
               </div>
               <div>
                 <label className="text-sm font-medium text-gray-600">Enrollment Date</label>
-                <p className="text-gray-900 mt-1">{format(new Date(student.enrollmentDate), "MMMM d, yyyy")}</p>
+<p className="text-gray-900 mt-1">
+                  {student.enrollmentDate && new Date(student.enrollmentDate).toString() !== 'Invalid Date'
+                    ? format(new Date(student.enrollmentDate), "MMMM d, yyyy")
+                    : "Date not available"}
+                </p>
               </div>
               <div className="md:col-span-2">
                 <label className="text-sm font-medium text-gray-600">Address</label>

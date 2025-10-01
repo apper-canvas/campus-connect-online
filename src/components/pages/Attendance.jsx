@@ -19,7 +19,16 @@ import { format } from "date-fns";
 const Attendance = () => {
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState("");
-  const [selectedDate, setSelectedDate] = useState(format(new Date(), "yyyy-MM-dd"));
+  const [selectedDate, setSelectedDate] = useState(() => {
+    try {
+      const today = new Date();
+      return today.toString() !== 'Invalid Date' 
+        ? format(today, "yyyy-MM-dd")
+        : new Date().toISOString().split('T')[0];
+    } catch (err) {
+      return new Date().toISOString().split('T')[0];
+    }
+  });
   const [students, setStudents] = useState([]);
   const [attendance, setAttendance] = useState({});
   const [loading, setLoading] = useState(true);

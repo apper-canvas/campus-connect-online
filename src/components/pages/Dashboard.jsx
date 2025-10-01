@@ -212,9 +212,20 @@ const Dashboard = () => {
               <div className="p-2 rounded-lg bg-white shadow-sm">
                 <ApperIcon name="Calendar" size={24} className="text-primary-600" />
               </div>
-              <div>
+<div>
                 <h3 className="font-bold text-gray-900">Today's Schedule</h3>
-                <p className="text-sm text-gray-600 mt-1">{format(new Date(), "EEEE, MMMM d, yyyy")}</p>
+                <p className="text-sm text-gray-600 mt-1">
+                  {(() => {
+                    try {
+                      const today = new Date();
+                      return today.toString() !== 'Invalid Date' 
+                        ? format(today, "EEEE, MMMM d, yyyy")
+                        : "Date unavailable";
+                    } catch (err) {
+                      return "Date unavailable";
+                    }
+                  })()}
+                </p>
               </div>
             </div>
             <div className="space-y-3 mt-4">

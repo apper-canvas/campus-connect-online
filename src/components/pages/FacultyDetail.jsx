@@ -136,7 +136,9 @@ const FacultyDetail = () => {
                 <div>
                   <p className="text-sm text-gray-600">Joining Date</p>
                   <p className="font-medium text-gray-900">
-                    {format(new Date(faculty.joiningDate), "MMMM d, yyyy")}
+{faculty.joiningDate && new Date(faculty.joiningDate).toString() !== 'Invalid Date'
+                      ? format(new Date(faculty.joiningDate), "MMMM d, yyyy")
+                      : "Date not available"}
                   </p>
                 </div>
               </div>
