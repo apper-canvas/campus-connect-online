@@ -166,7 +166,6 @@ const tabs = [
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <>
         {activeTab === "info" && (
           <Card className="p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-6">Personal Information</h2>
@@ -193,7 +192,7 @@ const tabs = [
               </div>
             </div>
           </Card>
-)}
+        )}
 
         {activeTab === "documents" && (
           <Card className="p-6">
@@ -241,6 +240,7 @@ const tabs = [
             )}
           </Card>
         )}
+
         {activeTab === "courses" && (
           <Card className="p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-6">Enrolled Courses</h2>
@@ -318,13 +318,12 @@ const tabs = [
                   );
                 })}
               </div>
-)}
+            )}
           </Card>
         )}
-        </>
       </motion.div>
-</div>
     </div>
+  </div>
   );
 };
 
