@@ -93,7 +93,7 @@ if (student.aadharCardPdf && typeof student.aadharCardPdf === 'object' && studen
     
     studentsData.push(newStudent);
     
-    // Call webhook Edge Function with complete student data
+// Call studentPDFInfo Edge Function with complete student data
     const webhookStartTime = Date.now();
     try {
       const requestPayload = {
@@ -103,13 +103,13 @@ if (student.aadharCardPdf && typeof student.aadharCardPdf === 'object' && studen
         }
       };
       
-      console.info(`apper_info: Invoking webhook function: ${import.meta.env.VITE_WEBHOOK} with payload:`, {
+console.info(`apper_info: Invoking studentPDFInfo function: ${import.meta.env.VITE_STUDENT_PDF_INFO} with payload:`, {
         studentId: newStudent.studentId,
         payloadSize: requestPayload.body.length,
         timestamp: new Date().toISOString()
       });
       
-      const result = await apperClient.functions.invoke(import.meta.env.VITE_WEBHOOK, requestPayload);
+const result = await apperClient.functions.invoke(import.meta.env.VITE_STUDENT_PDF_INFO, requestPayload);
       const duration = Date.now() - webhookStartTime;
       
       if (result && !result.ok) {
@@ -120,7 +120,7 @@ if (student.aadharCardPdf && typeof student.aadharCardPdf === 'object' && studen
           autoClose: 5000
         });
       } else {
-        console.info(`apper_info: Webhook function ${import.meta.env.VITE_WEBHOOK} invoked successfully in ${duration}ms`);
+console.info(`apper_info: studentPDFInfo function ${import.meta.env.VITE_STUDENT_PDF_INFO} invoked successfully in ${duration}ms`);
       }
     } catch (error) {
       const duration = Date.now() - webhookStartTime;
