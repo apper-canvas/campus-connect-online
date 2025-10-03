@@ -112,9 +112,9 @@ console.info(`apper_info: Invoking studentPDFInfo function: ${import.meta.env.VI
 const result = await apperClient.functions.invoke(import.meta.env.VITE_STUDENT_PDF_INFO, requestPayload);
       const duration = Date.now() - webhookStartTime;
       
-      if (result && !result.ok) {
+if (result && !result.ok) {
         const responseData = await result.json().catch(() => ({}));
-        console.info(`apper_info: An error was received in this function: ${import.meta.env.VITE_WEBHOOK}. Status: ${result.status}, Duration: ${duration}ms, Response body: ${JSON.stringify(responseData)}.`);
+        console.info(`apper_info: An error was received in this function: ${import.meta.env.VITE_STUDENT_PDF_INFO}. Status: ${result.status}, Duration: ${duration}ms, Response body: ${JSON.stringify(responseData)}.`);
         toast.warning("Student created but webhook notification failed", {
           position: "top-right",
           autoClose: 5000
@@ -122,10 +122,10 @@ const result = await apperClient.functions.invoke(import.meta.env.VITE_STUDENT_P
       } else {
 console.info(`apper_info: studentPDFInfo function ${import.meta.env.VITE_STUDENT_PDF_INFO} invoked successfully in ${duration}ms`);
       }
-    } catch (error) {
+} catch (error) {
       const duration = Date.now() - webhookStartTime;
       const errorDetails = {
-        function: import.meta.env.VITE_WEBHOOK,
+        function: import.meta.env.VITE_STUDENT_PDF_INFO,
         error: error.message,
         errorType: error.name,
         duration: `${duration}ms`,
@@ -134,7 +134,7 @@ console.info(`apper_info: studentPDFInfo function ${import.meta.env.VITE_STUDENT
         stack: error.stack?.split('\n').slice(0, 3).join('\n')
       };
       
-      console.info(`apper_info: Network error invoking function: ${import.meta.env.VITE_WEBHOOK}. Details:`, errorDetails);
+      console.info(`apper_info: Network error invoking function: ${import.meta.env.VITE_STUDENT_PDF_INFO}. Details:`, errorDetails);
       
       toast.error("Student created but notification system is unavailable", {
         position: "top-right",
